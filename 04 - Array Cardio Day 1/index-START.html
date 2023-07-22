@@ -35,31 +35,126 @@
       'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
-    
+
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const born1500 = inventors.filter((inv) => {
+        if(inv.year >= 1500 && inv.year < 1600){
+            return true;
+        }else{
+          return false;
+        }
+    })
+    console.log(born1500)
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const first_last = inventors.map((inv) => {
+      return (`${inv.first} , ${inv.last}`)
+    })
+    console.log(first_last)
+    // console.log(results)
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-
+    const sort_birth = inventors.sort(function(a,  b){
+    if(a.year > b.year){
+        return 1
+    }else{
+        return -1
+    }
+})
+console.log(sort_birth)
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+  const yearsLived = inventors.reduce((total, inv) => {return total + (inv.passed - inv.year)}, 0)
+  console.log(yearsLived)
 
     // 5. Sort the inventors by years lived
+    const oldest = inventors.sort((a, b) => {
+  const lastGuy = a.passed - a.year;
+  const next = b.passed - b.year;
+
+  if (lastGuy > next) {
+    return -1; // Negative value means "a" comes before "b"
+  } else {
+    return 1; // Positive value means "b" comes before "a"
+  }
+});
+console.log(oldest)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+  const  BoulevardsOfParis = [
+"Haussmann\'s renovation of Paris",
+"Boulevards of the Marshals",
+"Boulevard Auguste-Blanqui",
+"Boulevard Barbès",
+"Boulevard Beaumarchais",
+"Boulevard de l'Amiral-Bruix",
+"Boulevard Mortier",
+"Boulevard Poniatowski",
+"Boulevard Soult",
+"Boulevard des Capucines",
+"Boulevard de la Chapelle",
+"Boulevard de Clichy",
+"Boulevard du Crime",
+"Boulevard du Général-d'Armée-Jean-Simon",
+"Boulevard Haussmann",
+"Boulevard de l'Hôpital",
+"Boulevard des Italiens",
+"Boulevard Lefebvre",
+"Boulevard de la Madeleine",
+"Boulevard de Magenta",
+"Boulevard Malesherbes",
+"Boulevard Marguerite-de-Rochechouart",
+"Boulevard Montmartre",
+"Boulevard du Montparnasse",
+"Boulevard Raspail",
+"Boulevard Richard-Lenoir",
+"Boulevard Saint-Germain",
+"Boulevard Saint-Michel",
+"Boulevard de Sébastopol",
+"Boulevard de Strasbourg",
+"Boulevard du Temple",
+"Boulevard Voltaire",
+"Boulevard de la Zone"]
 
+const deBoulevard = BoulevardsOfParis.filter(boul => {
+  if(boul.includes("de")){
+    return boul
+  }
+})
+console.log(deBoulevard)
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const alpha = people.sort(function(last, nest){
+      // console.log(last)
+    const lastName = last.split(', ')[0]
+    const lastNameB = nest.split(', ')[0]
 
+    if(lastName < lastNameB){
+      return -1
+    }else if(lastName > lastNameB){
+    return 1
+    }else{
+        return 0
+    }
+  })
+  console.log(alpha)
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    const sum_up = data.reduce((accm, cur) =>{
+    if(!accm[cur]){
+        accm[cur] = 0
+    }
+        accm[cur]++
+    return accm
+}, {})
+console.log(sum_up)
 
   </script>
 </body>
